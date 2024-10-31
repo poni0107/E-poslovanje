@@ -2,16 +2,16 @@
 
 ## Team members
 
-Marijana Jeremić
-Petar Milojević
-Dimitrije Marković
-Sava Đurić
-Jovan Obradović
+-  Marijana Jeremić
+-  Petar Milojević
+-  Dimitrije Marković
+-  Sava Đurić
+-  Jovan Obradović
 
 ## Tech Stack
-The website was made using the following technologies:
+-  The website was made using the following technologies:
 
-Backend
-Frontend
-Database
-ML
+-  __Backend__     --
+-  __Frontend__    --
+-  __Database__    --
+-  __ML__  --
