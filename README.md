@@ -9,7 +9,7 @@
 -  Jovan Obradović
 
 ## Tech Stack
--  The website was made using the following technologies:
+  The website was made using the following technologies:
 
 -  __Backend__     --
 -  __Frontend__    --
