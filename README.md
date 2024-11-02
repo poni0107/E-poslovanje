@@ -1,4 +1,4 @@
-# E-poslovanje grupa 5
+# Project title: Online Platform for Managing Telescope and Astronomy Equipment Reservations
 
 ## Team members
 
