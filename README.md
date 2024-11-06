@@ -5,7 +5,7 @@
 -  __Marijana Jeremić__  -- __Backend__
 -  __Petar Milojević__   -- __Backend__
 -  __Sava Đurić__  -- __Backend__
--  __Dimitrije Marković__  -- __Frontend__
+-  __Димитрије Марковић__  -- __Frontend__
 -  __Jovan Obradović__  -- __Frontend__
 
 ## Tech Stack
