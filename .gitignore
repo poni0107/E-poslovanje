@@ -1,5 +1,7 @@
 # Ignore virtual environment directories
-epos/
+epos/bin
+epos/lib
+epos/lib64
 
 # Ignore PyCharm configuration file
 epos/pyenv.cfg
