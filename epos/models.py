@@ -5,7 +5,7 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
-from django.db import models
+import django.db
 
 
 class Accessories(models.Model):
@@ -254,7 +254,23 @@ class Users(models.Model):
     address = models.TextField(blank=True, null=True)
     city = models.CharField(max_length=50, blank=True, null=True)
     zip_code = models.CharField(max_length=10, blank=True, null=True)
-    user_type = models.TextField(blank=True, null=True)  # This field type is a guess.
+    #user_type = models.TextField(blank=True, null=True)  # This field type is a guess.
+    class Users(models.Model):
+        ADMIN = 'Admin'
+        CUSTOMER = 'Customer'
+
+        USER_TYPE_CHOICES = [
+            (ADMIN, 'Admin'),
+            (CUSTOMER, 'Customer'),
+        ]
+    user_type = models.CharField(
+        max_length=10,
+        choices=USER_TYPE_CHOICES,
+        default=CUSTOMER,
+        blank=True,
+        null=True
+    )
+
     created_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
