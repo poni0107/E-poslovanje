@@ -46,9 +46,35 @@ class AccessoryBundles(models.Model):
         db_table = 'accessory_bundles'
 
 
+class ItemType:
+    pass #do not understand why it s necessary,but it works
+
+
 class Images(models.Model):
     image_id = models.AutoField(primary_key=True)
-    item_type = models.TextField()  # This field type is a guess.
+    #item_type = models.TextField()  # This field type is a guess
+    class ItemType(models.TextChoices):
+        TELESCOPE = 'Telescope', 'Telescope'
+        ACCESSORY = 'Accessory', 'Accessory'
+
+        item_type = models.CharField(
+            max_length=10,
+            choices=ItemType.choices,
+            default=ItemType.ACCESSORY  # Opcionalno: podrazumevana vrednost
+        )
+
+        class ItemTypeChoices(models.TextChoices):
+            TELESCOPE = 'Telescope', 'Telescope'
+            ACCESSORY = 'Accessory', 'Accessory'
+
+        image_id = models.AutoField(primary_key=True)
+
+        item_type = models.CharField(
+            max_length=10,  # Maksimalna dužina koja podržava 'Telescope' i 'Accessory'
+            choices=ItemTypeChoices.choices,  # Korišćenje .choices iz TextChoices klase
+            default=ItemTypeChoices.ACCESSORY  # Podrazumevana vrednost
+        )
+
     item_id = models.IntegerField()
     image_url = models.CharField(max_length=255)
     uploaded_at = models.DateTimeField(blank=True, null=True)
@@ -88,11 +114,37 @@ class Payments(models.Model):
     order = models.ForeignKey(Orders, models.DO_NOTHING, blank=True, null=True)
     user = models.ForeignKey('Users', models.DO_NOTHING)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_method = models.TextField(blank=True, null=True)  # This field type is a guess.
-    status = models.TextField(blank=True, null=True)  # This field type is a guess.
+    #payment_method = models.TextField(blank=True, null=True)  # This field type is a guess.
+    #status = models.TextField(blank=True, null=True)  # This field type is a guess.
     transaction_id = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
 
+    class PaymentMethod(models.TextChoices):
+        CREDIT_CARD = 'Credit Card', 'Credit Card'
+        PAYPAL = 'PayPal', 'PayPal'
+        BANK_TRANSFER = 'Bank Transfer', 'Bank Transfer'
+        CASH = 'Cash', 'Cash'
+        OTHER = 'Other', 'Other'
+
+    class PaymentStatus(models.TextChoices):
+        PENDING = 'Pending', 'Pending'
+        COMPLETED = 'Completed', 'Completed'
+        FAILED = 'Failed', 'Failed'
+        REFUNDED = 'Refunded', 'Refunded'
+        CANCELED = 'Canceled', 'Canceled'
+
+    payment_method = models.CharField(
+        max_length=20,
+        choices=PaymentMethod.choices,
+        blank=True,
+        null=True
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=PaymentStatus.choices,
+        blank=True,
+        null=True
+    )
     class Meta:
         managed = False
         db_table = 'payments'
@@ -119,7 +171,17 @@ class Reservations(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     total_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.TextField(blank=True, null=True)  # This field type is a guess.
+    #status = models.TextField(blank=True, null=True)  # This field type is a guess.
+    class Status(models.TextChoices):
+        PENDING = 'Pending', 'Pending'
+        CONFIRMED = 'Confirmed', 'Confirmed'
+        CANCELLED = 'Cancelled', 'Cancelled'
+
+    status = models.CharField(
+        max_length=10,
+        choices=Status.choices,
+        default=Status.PENDING
+    )
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
 
@@ -131,7 +193,19 @@ class Reservations(models.Model):
 class Reviews(models.Model):
     review_id = models.AutoField(primary_key=True)
     user = models.ForeignKey('Users', models.DO_NOTHING)
-    item_type = models.TextField()  # This field type is a guess.
+    #item_type = models.TextField()
+    # This field type is a guess.
+    class ItemTypeChoices(models.TextChoices):
+        TELESCOPE = 'Telescope', 'Telescope'
+        ACCESSORY = 'Accessory', 'Accessory'
+
+    image_id = models.AutoField(primary_key=True)
+
+    item_type = models.CharField(
+        max_length=10,  # Maksimalna dužina koja podržava 'Telescope' i 'Accessory'
+        choices=ItemTypeChoices.choices,  # Korišćenje .choices iz TextChoices klase
+        default=ItemTypeChoices.ACCESSORY  # Podrazumevana vrednost
+    )
     item_id = models.IntegerField()
     rating = models.IntegerField(blank=True, null=True)
     review_text = models.TextField(blank=True, null=True)
