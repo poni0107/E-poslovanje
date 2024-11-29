@@ -5,6 +5,7 @@ epos/lib64
 
 # Ignore PyCharm configuration file
 epos/pyenv.cfg
+epos/pyvenv.cfg
 
 # Ignore Python bytecode files
 *.pyc
